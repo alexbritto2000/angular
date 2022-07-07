@@ -1,0 +1,152 @@
+<div class="container-fluid" style="width:50%;">
+  
+  <h2 style="text-align:center;background-image:linear-gradient(45deg, #00000052, #1e8547)">Registration Forms</h2>
+
+  {{registrationForm.value | json}}
+  <form [formGroup]="registrationForm" (ngSubmit)="onSubmit(registrationForm)" >
+    <div class="form-group">
+      <label>User name</label>
+      <input type="text" formControlName="userName" type="text" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.userName.errors }">
+
+      <div *ngIf="submitted && f.userName.errors" class="invalid-feedback">
+        <div *ngIf="f.userName.errors.required">User name is required</div>
+        <div *ngIf="f.userName.errors.minlength">User name must be greater than 4 character</div>
+        <div *ngIf="f.userName.errors.maxlength">User name must be less than 10 character</div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label>Email</label>
+      <input type="email" formControlName="email" type="text" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.email.errors }">
+
+      <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+        <div *ngIf="f.email.errors.required">Email is required</div>
+        <div *ngIf="f.email.errors.pattern">Email must be end with @sabbatech.com</div> 
+        <!-- <div *ngIf="f.email.errors.emailDomain">{{f.email.errors.emailDomain}}</div> -->
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label>Password</label>
+      <input type="password" formControlName="password" type="password" class="form-control" [ngClass]="{ 'is-invalid' : submitted && f.password.errors }">
+
+      <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+        <div *ngIf="f.password.errors.required">Password is required</div>
+        <div *ngIf="f.password.errors.minlength">Password name must be greater than 8 character</div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label>Confirm Password</label>
+      <input formControlName="confirmPassword" type="password" class="form-control" [ngClass]="{'is-invalid': submitted && f.confirmPassword.errors}">
+
+      <div *ngIf="submitted && f.confirmPassword.errors" class="invalid-feedback">
+        <div *ngIf="f.confirmPassword.errors.required">Confirm Password is required</div>
+        <div *ngIf="f.confirmPassword.errors.minlength">Password must be greater than 8 character</div>
+        <div *ngIf="f.confirmPassword.errors.mustMatch">Passwords must match</div>
+      </div>
+    </div>
+
+    <div formGroupName="address">
+    <div class="form-group">
+      <label>City</label>
+      <input formControlName="city" type="text" class="form-control" [ngClass]="{'is-invalid': submitted && f.address.controls.city.errors}">
+
+      <div *ngIf="submitted && f.address.controls.city.errors" class="invalid-feedback">
+        <div *ngIf="f.address.controls.city.errors.required">City is required</div>
+      </div>
+    </div>
+    <div class="form-group">
+      <label>State</label>
+      <input formControlName="state" type="text" class="form-control" [ngClass]="{'is-invalid': submitted && f.address.controls.state.errors}">
+
+      <div *ngIf="submitted && f.address.controls.state.errors" class="invalid-feedback">
+        <div *ngIf="f.address.controls.state.errors.required">State is required</div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label>Postal Code</label>
+      <input formControlName="postalCode" type="text" class="form-control" [ngClass]="{'is-invalid': submitted && f.address.controls.postalCode.errors}">
+
+      <div *ngIf="submitted && f.address.controls.postalCode.errors" class="invalid-feedback">
+        <div *ngIf="f.address.controls.postalCode.errors.required">Postal code is required</div>
+      </div>
+    </div>
+    </div>
+
+    <button class="btn btn-primary" style="margin-right:10px; margin-top:20px; margin-bottom:20px;margin-left:180px;">Register</button>
+    <button (click)="loadApiData()" class="btn btn-secondary ml-2" type="button">Load API Data</button>
+  </form>
+
+  <h1 style="text-align:center;background-image:linear-gradient(45deg, #00000052, #1e8547);">Submitted Data</h1>
+<!-- 
+  <button mat-raised-button color="primary">Primary</button> -->
+
+  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+    <!--- Note that these columns can be defined in any order.
+          The actual rendered columns are set as a property on the row definition" -->
+  
+    <!-- Name Column -->
+    <ng-container matColumnDef="userName" style="width:1000px;">
+      <th mat-header-cell *matHeaderCellDef> User name </th>
+      <td mat-cell *matCellDef="let element"> {{element.userName}} </td>
+    </ng-container>
+
+       <!--Id Column -->
+       <ng-container matColumnDef="Id">
+        <th mat-header-cell *matHeaderCellDef> Id </th>
+        <td mat-cell *matCellDef="let element"> {{element.Id}} </td>
+      </ng-container>
+  
+    <!-- Email Column -->
+    <ng-container matColumnDef="email">
+      <th mat-header-cell *matHeaderCellDef> email </th>
+      <td mat-cell *matCellDef="let element"> {{element.email}} </td>
+    </ng-container>
+  
+    <!-- Passwor Column -->
+    <ng-container matColumnDef="password">
+      <th mat-header-cell *matHeaderCellDef> Password </th>
+      <td mat-cell *matCellDef="let element"> {{element.password}} </td>
+    </ng-container>
+  
+    <!-- Address Column -->
+    <ng-container matColumnDef="address">
+      <th mat-header-cell *matHeaderCellDef> Address </th>
+      <td mat-cell *matCellDef="let element"> {{element.address}} </td>
+    </ng-container>
+
+    <!-- <button mat-raised-button color="primary">Primary</button> -->
+    <ng-container matColumnDef="actions">
+      <th mat-header-cell *matHeaderCellDef> Actions </th>
+      <td mat-cell *matCellDef="let element">
+           <!-- <button mat-raised-button color="warn">Warn</button> -->
+           <!-- <button mat-icon-button matTooltip="Click to Delete" class="iconbutton"
+            color="warn"> -->
+            <!-- <button mat-icon-button matTooltip="Click to Delete" class="iconbutton"
+            color="warn" (click)="openDialog(element)">
+            <mat-icon>delete</mat-icon></button> 
+
+            <button mat-icon-button matTooltip="Click to Delete" class="iconbutton" color="primary" (click)="openEditDialog(element)">
+              <mat-icon>edit</mat-icon>
+            </button> -->
+            <button mat-icon-button [matMenuTriggerFor]="menu">
+              <mat-icon>more_vert</mat-icon>
+            </button>
+            <mat-menu #menu="matMenu">
+              <button mat-icon-button matTooltip="Click to Delete" class="iconbutton" color="primary" (click)="openEditDialog(element)" style="width:100%;padding-right: 13px;">
+                <mat-icon>edit</mat-icon>Edit
+              </button>
+              <button mat-icon-button matTooltip="Click to Delete" class="iconbutton"
+              color="warn" (click)="openDialog(element)" style="width:100%;">
+              <mat-icon>delete</mat-icon>Delete</button><br> 
+            </mat-menu>
+      </td>
+    </ng-container>
+  
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+</div>

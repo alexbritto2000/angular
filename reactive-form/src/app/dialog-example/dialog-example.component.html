@@ -1,0 +1,14 @@
+<div class="delete">
+
+    <h2 mat-dialog-title>Are you sure delete this element?</h2>
+    <mat-dialog-content>
+        <h5>User name:  {{data.name.userName}}</h5>
+        <h5>Email:  {{data.name.email}}</h5>
+        <h5>Password:  {{data.name.password}}</h5>
+        <h5>Address:  {{data.name.address}}</h5>
+    </mat-dialog-content>
+    <mat-dialog-actions>
+        <button mat-button mat-dialog-close mat-dialog-close="deleteTrue">delete</button>
+        <button mat-button mat-dialog-close mat-dialog-close="false">cancel</button>
+    </mat-dialog-actions>
+</div>
