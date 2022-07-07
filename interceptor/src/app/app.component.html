@@ -1,0 +1,32 @@
+<h1>Demo Table</h1>
+<div *ngIf="appService.isLoading | async" class="loader-container">
+  <mat-spinner style="top: 50%; left: 50%"></mat-spinner>
+</div>
+<table>
+  <tr *ngFor="let user of users; let index = index">
+    <td>{{index +1}}</td>
+    <td>{{user.name}}</td>
+    <td>{{user.email}}</td>
+  </tr>
+</table>
+<button type="button" class="btn btn-primary" (click)="setLocal()" style="margin:10px;">Local Storage Add</button>
+<button type="button" class="btn btn-danger" (click)="delLocal()">Local Storage Del</button>
+<h3 style="margin-left: 40px;">Hi {{local}}</h3>
+ 
+<div style="margin:10px">
+  <h5>Cookies In Angular</h5>
+  <p>Name: {{cookie_name}}</p>
+  <button class="btn btn-warning" (click)="setCookie()" style="margin-right: 10px;">Set Cookies</button>
+  <button class="btn btn-warning" (click)="getCookie()" style="margin-right: 10px;">Get Cookies</button>
+  <button class="btn btn-danger" (click)="deleteCookie()" style="margin-right: 10px;">Delete</button>
+  <!-- <button class="btn btn-warning" (click)="deleteAll()">Delete All</button> -->
+</div>
+
+<div style="margin:10px">
+  <h5>Session storage In Angular</h5>
+  <p>Name: {{session_name}}</p>
+  <button class="btn btn-warning" (click)="setSession()" style="margin-right: 10px;">Set Session storage</button>
+  <button class="btn btn-warning" (click)="delSession()" style="margin-right: 10px;">Delete</button>
+  <!-- <button class="btn btn-warning" (click)="deleteAll()">Delete All</button> -->
+</div>
+
