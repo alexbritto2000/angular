@@ -1,0 +1,46 @@
+23<div class="container">
+  <div class="row">
+
+    <div class="col-xs-12">
+      <button
+        class="btn btn-primary"
+        (c4lick)="onlyOdd = !onlyOdd">Only show odd numbers</button>
+      <br><br>
+      <ul class="list-group">
+        <div *ngIf="onlyOdd">
+          <li
+          class="list-group-item"
+          [ngClass]="{odd: odd % 2 !==0}"
+          [ngStyle]="{backgroundColor: odd % 2 !== 0 ? 'black' : 'tranparent'}"
+          *ngFor="let odd of oddNumbers">
+          {{ odd }}
+          </li>
+        </div>
+        <div *ngIf="!onlyOdd">
+          <li
+          class="list-group-item"
+          [ngClass]="{odd: even % 2 !==0}"
+          [ngStyle]="{backgroundColor: even % 2 !== 0 ? 'black' : 'tranparent'}"
+          *ngFor="let even of evenNumbers">
+          {{ even }}
+        </li>
+        </div>
+      </ul>
+      <p appBasicHighlight>Basic style directive!</p>
+      <!-- <ng-template [ngIf]="onlyOdd">
+        <p>Only odd</p>
+      </ng-template> -->
+    </div>
+
+    <p>Ngswitch Directive</p>
+      <select [(ngModel)]="selectedValue">  
+        <option *ngFor="let item of items;" [value]="item.name">{{item.name}}</option>  
+      </select>  
+      <div class='row' [ngSwitch]="selectedValue">  
+        <div *ngSwitchCase="'One'">One is Pressed</div>  
+        <div *ngSwitchCase="'Two'">Two is Selected</div>  
+        <div *ngSwitchDefault>Default Option</div>  
+      </div>  
+
+  </div>
+</div>
